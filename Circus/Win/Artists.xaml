@@ -1,0 +1,58 @@
+﻿<Window x:Class="Circus.Win.Artists"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Circus.Win"
+        mc:Ignorable="d"
+        Title="Artists" Height="450" Width="800">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="АРТИСТЫ" 
+                   FontSize="18" FontWeight="Bold" Margin="0 0 0 10"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 0 0 10">
+            <TextBlock Text="Tип:" VerticalAlignment="Center" Margin="5"/>
+            <ComboBox x:Name="cbTypeFilter" SelectionChanged="cbTypeFilter_SelectionChanged">
+                <ComboBoxItem Content="Все"/>
+                <ComboBoxItem Content="начинающий"/>
+                <ComboBoxItem Content="продвигающийся"/>
+                <ComboBoxItem Content="VIP"/>
+            </ComboBox>
+            <TextBlock Text="Поиск:" VerticalAlignment="Center" Margin="5"/>
+            <TextBox x:Name="txtSearch"   TextChanged="txtSearch_TextChanged" Width="157"/>
+            <Button x:Name="UpdateTypes" Content="Обновить"  Click="btnUpdateTypes_Click" Margin=" 5  0 0  0"/>
+        </StackPanel>
+
+        <DataGrid x:Name="dgArtists" Grid.Row="2"    AutoGenerateColumns="False"   SelectionMode="Single" SelectionChanged="dgArtists_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding ArtistID}" Width="Auto"/>
+                <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}" Width="*"/>
+                <DataGridTextColumn Header="кол-во выступлений" Binding="{Binding SuccessfulPerformances}" Width="Auto"/>
+                <DataGridTextColumn Header="Тип" Binding="{Binding Type}" Width="Auto">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="Foreground">
+                                <Setter.Value>
+                                    <Binding Path="Type"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Гримерка" Binding="{Binding DressingRoom}" Width="Auto"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 10 0 0">
+            <Button Content="Назад" Click="Button_Click"  Margin="10"/>
+            <Button x:Name="btnAddArtist" Content="Добавить"  Click="btnAddArtist_Click" Margin="10"/>
+            <Button x:Name="btnEditArtist" Content="Редактировать"  Click="btnEditArtist_Click" Margin="10"/>
+            <Button x:Name="btnDeleteArtist" Content="Удалить"  Click="btnDeleteArtist_Click" Margin="10"/>
+        </StackPanel>
+    </Grid>
+</Window>
